@@ -13,7 +13,6 @@ namespace Bruno.Scripts.AI.CustomNodes
         private GameObjectVariable m_Self;
         private GameObjectVariable m_Target;
         private BoolVariable m_PlayerSeen;
-        private BoolVariable m_IsDayTime;
         private IntVariable m_Id;
         private NativeMob m_Mob;
         
@@ -22,7 +21,6 @@ namespace Bruno.Scripts.AI.CustomNodes
             m_Self = blackboard.GetVariable<GameObjectVariable>("Self");
             m_Target = blackboard.GetVariable<GameObjectVariable>("Target");
             m_PlayerSeen = blackboard.GetVariable<BoolVariable>("PlayerSeen");
-            m_IsDayTime = blackboard.GetVariable<BoolVariable>("IsDayTime");
             m_Id = blackboard.GetVariable<IntVariable>("id");
             m_Mob = m_Self.Value.GetComponent<NativeMob>();
         }
@@ -35,9 +33,15 @@ namespace Bruno.Scripts.AI.CustomNodes
                 return NodeResult.success;
             }
 
+            if (m_Mob.PlayerDetected())
+            {
+                m_Id.Value = 1;
+                return NodeResult.success;
+            }
+
             m_Target.Value = null;
             m_Id.Value = 0;
-            m_Mob.agent.speed = Random.Range(0.4f, m_Mob.Speed);
+            m_Mob.agent.speed = Random.Range(0.4f, m_Mob.speed);
 
             if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
             {

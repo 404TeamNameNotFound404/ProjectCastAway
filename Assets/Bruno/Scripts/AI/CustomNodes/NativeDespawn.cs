@@ -11,8 +11,6 @@ namespace Bruno.Scripts.AI.CustomNodes
         public Blackboard blackboard;
         private GameObjectVariable m_Self;
         private GameObjectVariable m_Target;
-        private BoolVariable m_PlayerSeen;
-        private BoolVariable m_IsDayTime;
         private IntVariable m_Id;
         private NativeMob m_Mob;
         
@@ -20,8 +18,6 @@ namespace Bruno.Scripts.AI.CustomNodes
         {
             m_Self = blackboard.GetVariable<GameObjectVariable>("Self");
             m_Target = blackboard.GetVariable<GameObjectVariable>("Target");
-            m_PlayerSeen = blackboard.GetVariable<BoolVariable>("PlayerSeen");
-            m_IsDayTime = blackboard.GetVariable<BoolVariable>("IsDayTime");
             m_Id = blackboard.GetVariable<IntVariable>("id");
             m_Mob = m_Self.Value.GetComponent<NativeMob>();
 
