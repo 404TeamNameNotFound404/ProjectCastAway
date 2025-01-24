@@ -45,8 +45,7 @@ namespace Bruno.Scripts.AI.CustomNodes
 
             if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
             {
-                Vector3 point;
-                if (GetRandomPosition(m_Mob.transform.position, 10.0f, out point))
+                if (GetRandomPosition(m_Mob.transform.position, 10.0f, out var point))
                 {
                     m_Mob.agent.SetDestination(point);
                 }
