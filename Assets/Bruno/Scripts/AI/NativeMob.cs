@@ -10,6 +10,7 @@ namespace Bruno.Scripts.AI
         private MonoBehaviourTree m_Tree;
         private NavMeshAgent m_Agent;
         [SerializeField] private float radius = 10.5f;
+        [SerializeField] private float spreadRadius = 2.0f;
 
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
@@ -51,19 +52,19 @@ namespace Bruno.Scripts.AI
         
         private void PickRandomDestination()
         {
-            var randomPoint = transform.position + UnityEngine.Random.insideUnitSphere * radius;
-            randomPoint.y = transform.position.y; // Ensure the Y-axis stays consistent
+            var randomPoint = transform.position + UnityEngine.Random.insideUnitSphere * radius * spreadRadius;
+            randomPoint.y = transform.position.y; 
 
-            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out var hit, radius, NavMesh.AllAreas))
             {
                 agent.SetDestination(hit.position);
             }
         }
 
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            if (!other.gameObject.CompareTag("casualties")) return;
+            if (!other.CompareTag("casualties")) return;
             gameObject.SetActive(false);
             Debug.Log("casualties");
         }
