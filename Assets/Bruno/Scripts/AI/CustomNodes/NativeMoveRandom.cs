@@ -38,6 +38,14 @@ namespace Bruno.Scripts.AI.CustomNodes
                 m_Id.Value = 1;
                 return NodeResult.success;
             }
+            
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 3;
+                m_Mob.gotHit = false;
+                return NodeResult.success;
+            }
+
 
             m_Target.Value = null;
             m_Id.Value = 0;

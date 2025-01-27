@@ -15,6 +15,8 @@ namespace Bruno.Scripts.AI
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
         public NavMeshAgent agent => m_Agent;
+        public bool gotHit { get; set; }
+   
         
         
         private void Start()
@@ -65,7 +67,8 @@ namespace Bruno.Scripts.AI
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("casualties")) return;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            gotHit = true;
             Debug.Log("casualties");
         }
     }

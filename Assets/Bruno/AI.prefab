@@ -138,6 +138,8 @@ GameObject:
   - component: {fileID: 8549343869058756209}
   - component: {fileID: 153377902621320971}
   - component: {fileID: 1634220051771413624}
+  - component: {fileID: -5841177010149347933}
+  - component: {fileID: 3168826577672276861}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -271,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 0}
+  selectedEditorNode: {fileID: 3168826577672276861}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -307,6 +309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 30
+  spreadRadius: 2
+  target: {fileID: 0}
 --- !u!114 &5324645633780643348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +416,7 @@ MonoBehaviour:
   - {fileID: 7368550924895328427}
   - {fileID: 8549343869058756209}
   - {fileID: 6517985186855638363}
+  - {fileID: -5841177010149347933}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -445,7 +450,7 @@ MonoBehaviour:
   title: MoveRandCond
   rect:
     serializedVersion: 2
-    x: 280
+    x: 200
     y: 280
     width: 160
     height: 44
@@ -497,7 +502,7 @@ MonoBehaviour:
   title: MoveRandom
   rect:
     serializedVersion: 2
-    x: 280
+    x: 200
     y: 360
     width: 160
     height: 44
@@ -522,8 +527,8 @@ MonoBehaviour:
   title: isNightTime
   rect:
     serializedVersion: 2
-    x: 600
-    y: 280
+    x: 520
+    y: 440
     width: 160
     height: 44
   parent: {fileID: 846168452758991471}
@@ -574,8 +579,8 @@ MonoBehaviour:
   title: Despawn
   rect:
     serializedVersion: 2
-    x: 600
-    y: 360
+    x: 520
+    y: 520
     width: 160
     height: 44
   parent: {fileID: 6517985186855638363}
@@ -599,8 +604,8 @@ MonoBehaviour:
   title: ChaseCond
   rect:
     serializedVersion: 2
-    x: 440
-    y: 460
+    x: 340
+    y: 440
     width: 160
     height: 44
   parent: {fileID: 846168452758991471}
@@ -651,8 +656,8 @@ MonoBehaviour:
   title: Chase
   rect:
     serializedVersion: 2
-    x: 440.78894
-    y: 543.74396
+    x: 340
+    y: 520
     width: 160
     height: 44
   parent: {fileID: 8549343869058756209}
@@ -688,3 +693,80 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5841177010149347933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308709504652489768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b95a918be8d9a4f9085201010bdec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Number Condition
+  rect:
+    serializedVersion: 2
+    x: 680
+    y: 280
+    width: 160
+    height: 44
+  parent: {fileID: 846168452758991471}
+  children:
+  - {fileID: 3168826577672276861}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  type: 1
+  floatReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 5425520753305547396}
+    key: id
+    constantValue: 0
+  comparator: 0
+  floatReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 3
+--- !u!114 &3168826577672276861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308709504652489768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09aba6979cc79ff729a28a59a76416b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Retreat
+  rect:
+    serializedVersion: 2
+    x: 680
+    y: 380
+    width: 160
+    height: 44
+  parent: {fileID: -5841177010149347933}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  blackboard: {fileID: 5425520753305547396}

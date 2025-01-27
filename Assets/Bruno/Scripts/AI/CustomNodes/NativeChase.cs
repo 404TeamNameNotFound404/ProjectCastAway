@@ -33,6 +33,14 @@ namespace Bruno.Scripts.AI.CustomNodes
             if (!DayNightCycle.isDayTime)
             {
                 m_Id.Value = 2;
+                m_Mob.gotHit = false;
+                return NodeResult.success;
+            }
+
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 3;
+                m_Mob.gotHit = false;
                 return NodeResult.success;
             }
 
