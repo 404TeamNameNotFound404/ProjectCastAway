@@ -35,7 +35,13 @@ namespace Bruno.Scripts.AI.CustomNodes
             
             m_Id.Value = 2;
             m_Mob.agent.SetDestination(m_Target.Value.transform.position);
-            
+            m_Mob.SetWalkAnimation();
+
+            if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
+            {
+                m_Mob.SetIdleAnimation();
+                m_Mob.agent.ResetPath();
+            }
             
             return NodeResult.running;
         }

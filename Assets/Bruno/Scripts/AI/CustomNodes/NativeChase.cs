@@ -46,6 +46,7 @@ namespace Bruno.Scripts.AI.CustomNodes
 
             m_Target.Value = m_Mob.player;
             m_Id.Value = 1;
+            m_Mob.SetWalkAnimation();
             m_Mob.agent.SetDestination(m_Target.Value.transform.position);
             return NodeResult.running;
         }

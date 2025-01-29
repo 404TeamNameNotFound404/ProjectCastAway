@@ -9,6 +9,7 @@ namespace Bruno.Scripts.AI
         private Blackboard m_Blackboard;
         private MonoBehaviourTree m_Tree;
         private NavMeshAgent m_Agent;
+        private Animator m_Animator;
         [SerializeField] private float radius = 10.5f;
         [SerializeField] private float spreadRadius = 2.0f;
 
@@ -16,7 +17,6 @@ namespace Bruno.Scripts.AI
         public GameObject player { get; private set; }
         public NavMeshAgent agent => m_Agent;
         public bool gotHit { get; set; }
-   
         
         
         private void Start()
@@ -24,6 +24,8 @@ namespace Bruno.Scripts.AI
             m_Blackboard = GetComponent<Blackboard>();
             m_Tree = GetComponent<MonoBehaviourTree>();
             m_Agent = GetComponent<NavMeshAgent>();
+            m_Animator = GetComponent<Animator>();
+            Debug.Log($"agent {m_Agent}");
             
             PickRandomDestination();
         }
@@ -63,11 +65,22 @@ namespace Bruno.Scripts.AI
             }
         }
 
+        public void SetIdleAnimation()
+        {
+            if (!m_Animator) return;
+            m_Animator.SetFloat("velocity", 0.0f);
+        }
+
+        public void SetWalkAnimation()
+        {
+            if(!m_Animator) return;
+            m_Animator.SetFloat("velocity", 1.0f);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("casualties")) return;
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
             gotHit = true;
             Debug.Log("casualties");
         }

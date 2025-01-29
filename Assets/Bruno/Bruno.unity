@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.7594305, g: 0.46557176, b: 0.46557176, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -986,11 +986,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobs:
-  - {fileID: 1791079158654007744, guid: 1dc3e960a8f4c971aa2276ebc16fa1c8, type: 3}
-  - {fileID: 1791079158654007744, guid: 1dc3e960a8f4c971aa2276ebc16fa1c8, type: 3}
-  - {fileID: 1791079158654007744, guid: 1dc3e960a8f4c971aa2276ebc16fa1c8, type: 3}
-  - {fileID: 1791079158654007744, guid: 1dc3e960a8f4c971aa2276ebc16fa1c8, type: 3}
-  - {fileID: 1791079158654007744, guid: 1dc3e960a8f4c971aa2276ebc16fa1c8, type: 3}
+  - {fileID: 6453647927138770703, guid: e9f7fbbddfce052f3af245d05db99aee, type: 3}
+  - {fileID: 6453647927138770703, guid: e9f7fbbddfce052f3af245d05db99aee, type: 3}
+  - {fileID: 6453647927138770703, guid: e9f7fbbddfce052f3af245d05db99aee, type: 3}
+  - {fileID: 6453647927138770703, guid: e9f7fbbddfce052f3af245d05db99aee, type: 3}
+  - {fileID: 6453647927138770703, guid: e9f7fbbddfce052f3af245d05db99aee, type: 3}
   floor: {fileID: 701651106}
 --- !u!1 &1926513739
 GameObject:

@@ -50,6 +50,7 @@ namespace Bruno.Scripts.AI.CustomNodes
             m_Target.Value = null;
             m_Id.Value = 0;
             m_Mob.agent.speed = Random.Range(0.4f, m_Mob.speed);
+            m_Mob.SetWalkAnimation();
 
             if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
             {
