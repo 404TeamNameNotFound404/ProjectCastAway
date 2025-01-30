@@ -12,6 +12,7 @@ namespace Bruno.Scripts.AI
         private Animator m_Animator;
         [SerializeField] private float radius = 10.5f;
         [SerializeField] private float spreadRadius = 2.0f;
+        [SerializeField] private float attackAreaThreshold = 0.8f;
 
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
@@ -53,6 +54,20 @@ namespace Bruno.Scripts.AI
             player = null;
             return false;
         }
+
+        public bool IsCloseToAttack(GameObject target)
+        {
+            if (!PlayerDetected()) return false;
+
+            var distance = Vector3.Distance(target.transform.position, agent.transform.position);
+            
+            if (distance <= attackAreaThreshold)
+            {
+                return true;
+            }
+
+            return false;
+        }
         
         private void PickRandomDestination()
         {
@@ -75,6 +90,18 @@ namespace Bruno.Scripts.AI
         {
             if(!m_Animator) return;
             m_Animator.SetFloat("velocity", 1.0f);
+        }
+
+        public void SetAttackAnimation()
+        {
+            if(!m_Animator) return;
+            m_Animator.SetBool("attack", true);
+        }
+
+        public void DisableAttackAnimation()
+        {
+            if(!m_Animator) return;
+            m_Animator.SetBool("attack", false);
         }
 
         private void OnTriggerEnter(Collider other)

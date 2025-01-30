@@ -40,7 +40,6 @@ namespace Bruno.Scripts.AI.CustomNodes
             if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
             {
                 m_Mob.SetIdleAnimation();
-                m_Mob.agent.ResetPath();
             }
             
             return NodeResult.running;

@@ -1492,6 +1492,8 @@ GameObject:
   - component: {fileID: 5628935414111509320}
   - component: {fileID: -7706791640690598587}
   - component: {fileID: -6478077781934023982}
+  - component: {fileID: 7076244484739315758}
+  - component: {fileID: 909866667904908291}
   m_Layer: 0
   m_Name: NativeVillager
   m_TagString: Untagged
@@ -1572,7 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: -6478077781934023982}
+  selectedEditorNode: {fileID: 909866667904908291}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1679,6 +1681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10.5
   spreadRadius: 2
+  attackAreaThreshold: 6.7
 --- !u!54 &-2559787911836378666
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1778,6 +1781,7 @@ MonoBehaviour:
   - {fileID: 5519437533527483085}
   - {fileID: 7808351944549609599}
   - {fileID: -7706791640690598587}
+  - {fileID: 7076244484739315758}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -1859,6 +1863,7 @@ MonoBehaviour:
   runtimePriority: 0
   breakpoint: 0
   blackboard: {fileID: 451389362498432633}
+  range: 10
 --- !u!114 &7808351944549609599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2008,6 +2013,83 @@ MonoBehaviour:
     width: 160
     height: 44
   parent: {fileID: -7706791640690598587}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  blackboard: {fileID: 451389362498432633}
+--- !u!114 &7076244484739315758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294820105164504999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b95a918be8d9a4f9085201010bdec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: EngageCond
+  rect:
+    serializedVersion: 2
+    x: 860
+    y: 300
+    width: 160
+    height: 44
+  parent: {fileID: 6764505232678483266}
+  children:
+  - {fileID: 909866667904908291}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  type: 1
+  floatReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 451389362498432633}
+    key: id
+    constantValue: 0
+  comparator: 0
+  floatReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 4
+--- !u!114 &909866667904908291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294820105164504999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e22f7809e49dea291de65c9ece1544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Engage
+  rect:
+    serializedVersion: 2
+    x: 860
+    y: 400
+    width: 160
+    height: 44
+  parent: {fileID: 7076244484739315758}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0

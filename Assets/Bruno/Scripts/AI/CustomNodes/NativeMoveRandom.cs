@@ -10,6 +10,8 @@ namespace Bruno.Scripts.AI.CustomNodes
     public class NativeMoveRandom : Leaf
     {
         public Blackboard blackboard;
+        public float range = 10.0f;
+        public MobSpawner m_Spawner;
         private GameObjectVariable m_Self;
         private GameObjectVariable m_Target;
         private BoolVariable m_PlayerSeen;
@@ -23,6 +25,7 @@ namespace Bruno.Scripts.AI.CustomNodes
             m_PlayerSeen = blackboard.GetVariable<BoolVariable>("PlayerSeen");
             m_Id = blackboard.GetVariable<IntVariable>("id");
             m_Mob = m_Self.Value.GetComponent<NativeMob>();
+            Debug.Log("move random started");
         }
 
         public override NodeResult Execute()
@@ -30,12 +33,14 @@ namespace Bruno.Scripts.AI.CustomNodes
             if (!DayNightCycle.isDayTime)
             {
                 m_Id.Value = 2;
+                m_Mob.agent.ResetPath();
                 return NodeResult.success;
             }
 
             if (m_Mob.PlayerDetected())
             {
                 m_Id.Value = 1;
+                m_Mob.agent.ResetPath();
                 return NodeResult.success;
             }
             
@@ -46,17 +51,20 @@ namespace Bruno.Scripts.AI.CustomNodes
                 return NodeResult.success;
             }
 
-
             m_Target.Value = null;
             m_Id.Value = 0;
             m_Mob.agent.speed = Random.Range(0.4f, m_Mob.speed);
+            m_Mob.agent.stoppingDistance = 0.2f;
             m_Mob.SetWalkAnimation();
+
+            var success = GetRandomPosition(out var direction);
 
             if (m_Mob.agent.remainingDistance <= m_Mob.agent.stoppingDistance)
             {
-                if (GetRandomPosition(m_Mob.transform.position, 10.0f, out var point))
+                if (success)
                 {
-                    m_Mob.agent.SetDestination(point);
+                    Debug.Log($"move to destination {direction}");
+                    m_Mob.agent.SetDestination(direction);
                 }
             }
           
@@ -64,10 +72,11 @@ namespace Bruno.Scripts.AI.CustomNodes
         }
 
 
-        private bool GetRandomPosition(Vector3 center ,float range, out Vector3 direction)
+        private bool GetRandomPosition(out Vector3 direction)
         {
-            var randomDirection = UnityEngine.Random.insideUnitSphere * range;
+            var randomDirection = m_Mob.transform.position + Random.insideUnitSphere * range; //Random.insideUnitSphere * range;
             NavMeshHit hit;
+            
             if (NavMesh.SamplePosition(randomDirection, out hit, 1.0f, NavMesh.AllAreas))
             {
                 direction = hit.position;

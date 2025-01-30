@@ -7,6 +7,7 @@ namespace Bruno.Scripts
     { 
         [SerializeField] private float cycleSpeed = 30.0f;
         [SerializeField] private TMP_Text text;
+        [SerializeField] private AudioClip alarmClip;
         private Light m_Light;
         private GameObject m_LightObject;
         private static bool _dayTime = true;
@@ -15,6 +16,7 @@ namespace Bruno.Scripts
         private float m_TimeUntilNight;
         private float m_TimeUntilSunrise;
         private float m_ContinuousAngle;
+        private AudioSource m_AudioSource;
         
         /// <summary>
         /// Return the day/night cycle time (if true is daytime otherwise is nighttime)
@@ -28,6 +30,7 @@ namespace Bruno.Scripts
             var initialAngle = m_LightObject.transform.rotation.eulerAngles.x;
             _dayTime = IsDay(initialAngle, 5.0f, 180.0f);
             text.fontSize = 23;
+            m_AudioSource = GetComponent<AudioSource>();
         }
         
         private void LateUpdate()
@@ -73,6 +76,9 @@ namespace Bruno.Scripts
                 {
                     Debug.Log("It's daytime!");
                     m_TimeUntilSunrise = 0;
+                    if (!alarmClip || !m_AudioSource) return;
+                    m_AudioSource.clip = alarmClip;
+                    m_AudioSource.PlayOneShot(alarmClip);
                 }
                 else
                 {
