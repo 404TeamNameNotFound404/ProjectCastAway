@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Controls inputActions;
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction shootAction;
+    private InputAction throwAction;
     private InputAction interactAction;
 
 
@@ -26,15 +27,15 @@ public class PlayerController : MonoBehaviour
         lookAction = inputActions.FindAction("Look");
         lookAction.performed += OnLook;
 
-        shootAction = inputActions.FindAction("Shoot");
-        shootAction.performed += OnShoot;
+        throwAction = inputActions.FindAction("Throw");
+        throwAction.performed += OnThrow;
 
         interactAction = inputActions.FindAction("Interact");
         interactAction.performed += OnInteract;
 
         moveAction.Enable();
         lookAction.Enable();
-        shootAction.Enable(); 
+        throwAction.Enable(); 
         interactAction.Enable();
 
 
@@ -46,19 +47,20 @@ public class PlayerController : MonoBehaviour
 
         lookAction.performed -= OnLook;
 
-        shootAction.performed -= OnShoot;
+        throwAction.performed -= OnThrow;
 
         interactAction.performed += OnInteract;
 
         moveAction.Disable();
         lookAction.Disable();
-        shootAction.Disable();
+        throwAction.Disable();
         interactAction.Disable();
     }
 
     public Vector2 GetMovement() 
     {
         return moveAction.ReadValue<Vector2>();
+
     }
 
     public Vector2 GetMouseLook()
@@ -68,9 +70,9 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    public float GetShoot()
+    public float GetThrow()
     {
-        return shootAction.ReadValue<float>();
+        return throwAction.ReadValue<float>();
 
     }
 
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour
         Vector2 lookInput = context.ReadValue<Vector2>();
     }
 
-    private void OnShoot(InputAction.CallbackContext context)
+    private void OnThrow(InputAction.CallbackContext context)
     {
         bool shootInput = context.ReadValueAsButton();
     }
