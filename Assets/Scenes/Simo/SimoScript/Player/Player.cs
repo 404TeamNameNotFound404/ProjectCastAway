@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageble
 {
     // RB
     private Rigidbody rb;
@@ -35,10 +35,14 @@ public class Player : MonoBehaviour
     [SerializeField] private Stun stunPrefab;
     [SerializeField] private Transform originThrow;
     [SerializeField] private float throwDelay = 1;
+
     private float throwCooldown;
 
 
-    
+    //HEALTH
+    [SerializeField] private float health = 100f;
+
+    private float maxHealth = 100f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -267,6 +271,20 @@ public class Player : MonoBehaviour
     }
 
 
+    public void TakeDamage(float damage) 
+    {
+        health -= damage;
+        if(health <= 50f) 
+        {
+            // VFX POISON
+        }
+        else if (health < 0) 
+        {
+            // VFX EYES CLOSE
+            Destroy(gameObject);
+            Debug.Log("Player has died.");
+        }
+    }
 
 
 
