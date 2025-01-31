@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Throw",
                     "type": "Button",
                     "id": "1aa2aa1b-8a26-4f9e-ba4b-ec4557bf1c49",
                     "expectedControlType": "",
@@ -105,7 +105,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
