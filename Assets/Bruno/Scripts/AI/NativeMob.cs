@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using MBT;
 using UnityEngine.AI;
@@ -103,11 +104,10 @@ namespace Bruno.Scripts.AI
             if(!m_Animator) return;
             m_Animator.SetBool("attack", false);
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("casualties")) return;
-            gameObject.SetActive(false);
+            if (!other.CompareTag("stun")) return;
             gotHit = true;
             Debug.Log("casualties");
         }

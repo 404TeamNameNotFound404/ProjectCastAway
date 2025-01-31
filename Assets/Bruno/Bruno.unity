@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 1548866612}
   m_Layer: 0
   m_Name: Sphere (1)
-  m_TagString: casualties
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -804,6 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleSpeed: 30
   text: {fileID: 322359240}
+  alarmClip: {fileID: 0}
 --- !u!1 &1861007510
 GameObject:
   m_ObjectHideFlags: 0
