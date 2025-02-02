@@ -11,15 +11,18 @@ namespace Bruno.Scripts.AI
         private MonoBehaviourTree m_Tree;
         private NavMeshAgent m_Agent;
         private Animator m_Animator;
+        [Header("Locomotion")]
         [SerializeField] private float radius = 10.5f;
         [SerializeField] private float spreadRadius = 2.0f;
         [SerializeField] private float attackAreaThreshold = 0.8f;
-
+        [Header("Engage")]
+        [SerializeField] private GameObject arrowSpawner;
+        [SerializeField] private GameObject arrowPrefab;
+        
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
         public NavMeshAgent agent => m_Agent;
         public bool gotHit { get; set; }
-        
         
         private void Start()
         {
@@ -55,20 +58,38 @@ namespace Bruno.Scripts.AI
             player = null;
             return false;
         }
-
+        
+        /// <summary>
+        /// Check whether the AI is looking at the direction of the player and if so, perform attack
+        /// </summary>
+        /// <param name="target"> The player </param>
+        /// <returns></returns>
         public bool IsCloseToAttack(GameObject target)
         {
             if (!PlayerDetected()) return false;
 
-            var distance = Vector3.Distance(target.transform.position, agent.transform.position);
-            
-            if (distance <= attackAreaThreshold)
+            var directionToTarget = (target.transform.position - agent.transform.position).normalized;
+            var dotProduct = Vector3.Dot(agent.transform.forward, directionToTarget);
+
+            if (dotProduct <= attackAreaThreshold)
             {
+                agent.transform.forward = Vector3.Lerp(agent.transform.forward, directionToTarget, Time.deltaTime * 6.0f); 
                 return true;
             }
 
             return false;
         }
+
+        /// <summary>
+        /// Shot arrow - Couldn't adapt the throw function due to camera forward calculation within player.Throw()
+        /// </summary>
+        public void Pop()
+        {
+            if (!arrowSpawner || !arrowPrefab)
+                return;
+            Instantiate(arrowPrefab, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
+        }
+
         
         private void PickRandomDestination()
         {
