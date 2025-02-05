@@ -45,8 +45,15 @@ namespace Bruno.Scripts.AI.CustomNodes
                 m_Mob.SetWalkAnimation();
                 return NodeResult.success;
             }
+
+            if (m_Mob.PlayerDetected())
+            {
+                m_Id.Value = 4;
+                return NodeResult.success;
+            }
             
             m_Id.Value = 4;
+           
             m_Mob.agent.ResetPath();
             m_Mob.SetAttackAnimation();
             
