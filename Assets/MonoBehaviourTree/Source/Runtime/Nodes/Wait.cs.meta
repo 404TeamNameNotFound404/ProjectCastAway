@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 58fe7bc6a9b18e148b82820c7c1c0a90
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/Nodes/Wait.cs
+  uploadId: 632476

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 76bba4b4f778fa9409a634bedf9d1aa1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/Nodes/Decorator.cs
+  uploadId: 632476

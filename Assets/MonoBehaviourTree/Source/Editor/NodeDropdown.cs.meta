@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: adc3d2af9116c5b418b63f5da3dc6feb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Editor/NodeDropdown.cs
+  uploadId: 632476

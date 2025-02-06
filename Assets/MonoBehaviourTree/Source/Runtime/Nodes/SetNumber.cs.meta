@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b98470d7a96ed124985c539edd964068
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/Nodes/SetNumber.cs
+  uploadId: 632476

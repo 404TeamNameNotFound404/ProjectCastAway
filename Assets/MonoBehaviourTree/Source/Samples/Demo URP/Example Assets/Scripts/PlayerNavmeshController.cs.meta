@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6f042bf63e59ff4b8b18485cc3d11b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Samples/Demo URP/Example Assets/Scripts/PlayerNavmeshController.cs
+  uploadId: 632476
