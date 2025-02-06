@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6b89410c953e6f040ad4e4cf9f03f07b
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Samples/Demo URP/Example2.unity
+  uploadId: 632476

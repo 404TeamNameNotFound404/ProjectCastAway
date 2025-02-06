@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f4e5f4db414f0ab4c82c187a7653e99d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/Variables/FloatVariable.cs
+  uploadId: 632476

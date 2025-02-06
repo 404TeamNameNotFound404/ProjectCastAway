@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cd8ecc8e5f7108044a8bbe27cc68610f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/Nodes/UpdatePositionService.cs
+  uploadId: 632476

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6009b9c4d85bb4d42941d1bf7d1547ef
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Samples/Demo URP/Example2/NavMesh.asset
+  uploadId: 632476

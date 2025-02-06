@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f78abb7d7a304aa41a91ef451cc8cb6e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Editor/MonoBehaviourTreeEditor.cs
+  uploadId: 632476

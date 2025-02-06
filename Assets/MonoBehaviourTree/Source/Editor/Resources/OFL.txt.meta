@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 217896aaf46e40f4bb3a0d03862bac36
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Editor/Resources/OFL.txt
+  uploadId: 632476

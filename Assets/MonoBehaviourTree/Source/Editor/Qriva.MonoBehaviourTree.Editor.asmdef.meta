@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c2da7737aab07f248add22487334a422
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Editor/Qriva.MonoBehaviourTree.Editor.asmdef
+  uploadId: 632476

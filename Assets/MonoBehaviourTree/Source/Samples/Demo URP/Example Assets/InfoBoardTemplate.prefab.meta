@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 15175a89b7c18334bbb6894ce2068ee3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Samples/Demo URP/Example Assets/InfoBoardTemplate.prefab
+  uploadId: 632476

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a72cb8ac73fa6f342b5a07b27abefd66
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 213452
+  packageName: MonoBehaviourTree
+  packageVersion: 1.2.0
+  assetPath: Assets/MonoBehaviourTree/Source/Runtime/IMonoBehaviourTreeTickListener.cs
+  uploadId: 632476
