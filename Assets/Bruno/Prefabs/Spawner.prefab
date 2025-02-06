@@ -42,11 +42,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3893958699974462896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba477d18d438acf4c8ab296c57749845, type: 3}
+  m_Script: {fileID: 11500000, guid: e3caf070eb6654dacb9a0f75f2dbeeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobs: []
-  floor: {fileID: 0}
+  mobs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  floor: {fileID: 3893958699974462896}
 --- !u!65 &2186454565043614770
 BoxCollider:
   m_ObjectHideFlags: 0
