@@ -271,18 +271,21 @@ public class Player : MonoBehaviour, IDamageble
     }
 
 
+    // HEALTH
     public void TakeDamage(float damage) 
     {
         health -= damage;
-        if(health <= 50f) 
-        {
-            // VFX POISON
-        }
-        else if (health < 0) 
+
+        if (health <= 0)
         {
             // VFX EYES CLOSE
-            Destroy(gameObject);
             Debug.Log("Player has died.");
+            Destroy(gameObject);
+        }
+        else if (health <= 50f)
+        {
+            // VFX POISON
+            Debug.Log("Player has 50% of health.");
         }
     }
 
