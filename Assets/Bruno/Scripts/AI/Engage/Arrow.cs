@@ -5,10 +5,10 @@ namespace Bruno.Scripts.AI.Engage
 {
     public class Arrow : MonoBehaviour
     {
-        private float m_Timer = 0.0f;
-        private float m_TimeToLive = 5.0f;
-        private Rigidbody m_Rigidbody;
-        private GameObject m_Target;
+        private float _mTimer = 0.0f;
+        private float _mTimeToLive = 5.0f;
+        private Rigidbody _mRigidbody;
+        private GameObject _mTarget;
         /// <summary>
         /// The agent that shot it
         /// </summary>
@@ -18,14 +18,14 @@ namespace Bruno.Scripts.AI.Engage
 
         private void Start()
         {
-            m_Rigidbody = GetComponent<Rigidbody>();
-            m_Rigidbody.isKinematic = false;
-            m_Rigidbody.mass = 2.0f;
-            m_Rigidbody.useGravity = true;
-            m_Target = GameObject.FindGameObjectWithTag("Player");
+            _mRigidbody = GetComponent<Rigidbody>();
+            _mRigidbody.isKinematic = false;
+            _mRigidbody.mass = 2.0f;
+            _mRigidbody.useGravity = true;
+            _mTarget = GameObject.FindGameObjectWithTag("Player");
             var targetDirection = source.transform.forward; 
-            m_Rigidbody.AddForce(targetDirection * (200.0f * Time.deltaTime), ForceMode.Impulse);
-            m_Rigidbody.linearVelocity = transform.forward * trajectorySpeed;
+            _mRigidbody.AddForce(targetDirection * (200.0f * Time.deltaTime), ForceMode.Impulse);
+            _mRigidbody.linearVelocity = transform.forward * trajectorySpeed;
         }
         
         private void FixedUpdate()
@@ -42,14 +42,14 @@ namespace Bruno.Scripts.AI.Engage
             //     m_Rigidbody.AddForce(targetDirection * 20.0f, ForceMode.Impulse);
             // }
             
-            if (m_Rigidbody.linearVelocity.magnitude > 0.1f)
+            if (_mRigidbody.linearVelocity.magnitude > 0.1f)
             {
-                transform.forward = m_Rigidbody.linearVelocity.normalized;
+                transform.forward = _mRigidbody.linearVelocity.normalized;
             }
 
-            m_Timer += Time.deltaTime;
+            _mTimer += Time.deltaTime;
 
-            if (m_Timer >= m_TimeToLive)
+            if (_mTimer >= _mTimeToLive)
             {
                 Destroy(gameObject);
             }

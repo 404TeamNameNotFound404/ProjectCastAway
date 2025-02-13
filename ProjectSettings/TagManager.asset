@@ -3,9 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: 
+  tags:
   - Enemy
   - casualties
+  - stun
   layers:
   - Default
   - TransparentFX

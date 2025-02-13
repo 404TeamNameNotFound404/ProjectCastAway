@@ -63,7 +63,6 @@ namespace Bruno.Scripts.AI.CustomNodes
             {
                 if (success)
                 {
-                    Debug.Log($"move to destination {direction}");
                     m_Mob.agent.SetDestination(direction);
                 }
             }

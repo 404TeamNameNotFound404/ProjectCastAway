@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c223b5254ae0cec4180d5af774d0d2b3
+timeCreated: 1480270739
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77078
+  packageName: Free Stylised Fantasy Weapons
+  packageVersion: 2.0
+  assetPath: Assets/FreeWeapons/Prefabs/Bow00_prefab.prefab
+  uploadId: 203947
