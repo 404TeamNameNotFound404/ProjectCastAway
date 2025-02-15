@@ -820,6 +820,8 @@ GameObject:
   - component: {fileID: 7522555246613012893}
   - component: {fileID: 518364243764429531}
   - component: {fileID: 5940914141082775768}
+  - component: {fileID: 7099664802132210056}
+  - component: {fileID: 1154148279754444267}
   m_Layer: 0
   m_Name: Guardian
   m_TagString: Untagged
@@ -968,7 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 518364243764429531}
+  selectedEditorNode: {fileID: 1154148279754444267}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1166,6 +1168,7 @@ MonoBehaviour:
     height: 44
   parent: {fileID: 2131742083992218317}
   children:
+  - {fileID: 7099664802132210056}
   - {fileID: 7319788900570730900}
   - {fileID: 9127923725560128345}
   - {fileID: 518364243764429531}
@@ -1400,6 +1403,83 @@ MonoBehaviour:
     width: 160
     height: 44
   parent: {fileID: 518364243764429531}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  blackboard: {fileID: 7262534873527489443}
+--- !u!114 &7099664802132210056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344001677859955422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b95a918be8d9a4f9085201010bdec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: StunCond
+  rect:
+    serializedVersion: 2
+    x: 100
+    y: 240
+    width: 160
+    height: 44
+  parent: {fileID: 5493856678764237712}
+  children:
+  - {fileID: 1154148279754444267}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  type: 1
+  floatReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 7262534873527489443}
+    key: id
+    constantValue: 0
+  comparator: 0
+  floatReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  intReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 4
+--- !u!114 &1154148279754444267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344001677859955422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c596bc8c14eca12b714427ec83cd32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Stun
+  rect:
+    serializedVersion: 2
+    x: 100
+    y: 352
+    width: 160
+    height: 44
+  parent: {fileID: 7099664802132210056}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0

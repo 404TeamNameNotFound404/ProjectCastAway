@@ -4,55 +4,58 @@ using UnityEngine;
 namespace Bruno.Scripts.AI.CustomNodes
 {
     [AddComponentMenu("")]
-    [MBTNode("Native/GuardianEngage")]
-    public class GuardianEngage : Leaf
+    [MBTNode("NativeMob/Stun")]
+    public class NativeStunBT : Leaf
     {
         public Blackboard blackboard;
         private GameObjectVariable _mSelf;
         private GameObjectVariable _mTarget;
         private IntVariable _mId;
-        private GuardianMob _mMob;
-        
+        private NativeMob _mMob;
+
+        private float _mTimer = 6.0f;
+
         public override void OnEnter()
         {
             _mSelf = blackboard.GetVariable<GameObjectVariable>("Self");
             _mTarget = blackboard.GetVariable<GameObjectVariable>("Target");
             _mId = blackboard.GetVariable<IntVariable>("id");
-            _mMob = _mSelf.Value.GetComponent<GuardianMob>();
+            _mMob = _mSelf.Value.GetComponent<NativeMob>();
+            Debug.Log("stunned");
         }
-        
+
         public override NodeResult Execute()
         {
-            _mMob.DisableIsStunned();
             _mMob.agent.ResetPath();
-            
-            _mId.Value = 3;
-            _mTarget.Value = _mMob.player;
-            _mMob.SetAttack();
-            
-            if (_mMob.gotHit)
+
+            _mId.Value = 4;
+            _mMob.SetStunAnimation();
+
+            _mTimer -= Time.deltaTime * 2.0f;
+
+            if (_mTimer <= 0.0f)
             {
-                _mId.Value = 4;
-                _mMob.SetIsStunned();
-                return NodeResult.success;
-            }
-            
-            if (!_mMob.PlayerDetected())
-            {
-                _mMob.agent.ResetPath();
+                Debug.Log("timer ended ");
+               _mMob.DisableStunAnimation();
+
+                if (_mMob.PlayerDetected())
+                {
+                    _mId.Value = 1;
+                    _mMob.SetWalkAnimation();
+                    _mMob.gotHit = false;
+                    return NodeResult.success;
+                }
+
                 _mId.Value = 0;
                 _mMob.SetIdleAnimation();
+                _mMob.gotHit = false;
                 return NodeResult.success;
+
             }
 
-            if (_mMob.PlayerDetected())
-            {
-                _mId.Value = 1;
-                _mMob.SetWalkAnimation();
-                return NodeResult.success;
-            }
-            
             return NodeResult.running;
         }
+
     }
 }
+

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using MBT;
 using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
 
 namespace Bruno.Scripts.AI
 {
@@ -19,6 +20,11 @@ namespace Bruno.Scripts.AI
         private new void Update()
         {
             base.Update();
+        }
+
+        protected new void FixedUpdate()
+        {
+            base.FixedUpdate();
         }
         
         /// <summary>

@@ -22,8 +22,12 @@ namespace Bruno.Scripts.AI
         {
             base.Update();
         }
-
-
+        
+        protected new void FixedUpdate()
+        {
+            base.FixedUpdate();
+        }
+        
         public void SetWalkAnimation()
         {
             MAnimator.SetFloat(Velocity, 1.0f);

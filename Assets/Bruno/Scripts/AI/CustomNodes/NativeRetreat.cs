@@ -34,6 +34,15 @@ namespace Bruno.Scripts.AI.CustomNodes
             
             m_Timer += Time.deltaTime * 2.0f;
             
+                        
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 4;
+                m_Mob.SetStunAnimation();
+                m_Mob.agent.ResetPath();
+                return NodeResult.success;
+            }
+            
             if (m_Timer >= TimeToRetreat)
             {
                 m_Mob.agent.ResetPath();
@@ -51,6 +60,8 @@ namespace Bruno.Scripts.AI.CustomNodes
                 m_Timer = 0;
                 return NodeResult.success;
             }
+            
+            
             
             return NodeResult.running;
         }

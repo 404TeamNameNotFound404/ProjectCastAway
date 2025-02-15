@@ -24,11 +24,20 @@ namespace Bruno.Scripts.AI.CustomNodes
         
         public override NodeResult Execute()
         {
+            _mMob.DisableIsStunned();
+            
             if (!_mMob.PlayerDetected())
             {
                 _mId.Value = 0;
                 _mMob.agent.ResetPath();
                 _mMob.SetIdleAnimation();
+                return NodeResult.success;
+            }
+
+            if (_mMob.gotHit)
+            {
+                _mId.Value = 4;
+                _mMob.SetIsStunned();
                 return NodeResult.success;
             }
             

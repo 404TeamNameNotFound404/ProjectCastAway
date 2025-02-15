@@ -42,6 +42,14 @@ namespace Bruno.Scripts.AI.CustomNodes
                 m_Mob.SetIdleAnimation();
             }
             
+                        
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 4;
+                m_Mob.SetStunAnimation();
+                return NodeResult.success;
+            }
+            
             return NodeResult.running;
         }
     }

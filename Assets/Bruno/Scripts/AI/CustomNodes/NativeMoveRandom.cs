@@ -30,6 +30,16 @@ namespace Bruno.Scripts.AI.CustomNodes
 
         public override NodeResult Execute()
         {
+            m_Mob.DisableStunAnimation();
+
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 4;
+                m_Mob.SetStunAnimation();
+                m_Mob.agent.ResetPath();
+                return NodeResult.success;
+            }
+            
             if (!DayNightCycle.isDayTime)
             {
                 m_Id.Value = 2;
@@ -40,14 +50,7 @@ namespace Bruno.Scripts.AI.CustomNodes
             if (m_Mob.PlayerDetected())
             {
                 m_Id.Value = 1;
-                m_Mob.agent.ResetPath();
-                return NodeResult.success;
-            }
-            
-            if (m_Mob.gotHit)
-            {
-                m_Id.Value = 3;
-                m_Mob.gotHit = false;
+               // m_Mob.agent.ResetPath();
                 return NodeResult.success;
             }
 

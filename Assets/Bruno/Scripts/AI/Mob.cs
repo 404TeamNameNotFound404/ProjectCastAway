@@ -1,3 +1,4 @@
+using System;
 using MBT;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,6 +7,7 @@ namespace Bruno.Scripts.AI
 {
     public class Mob : MonoBehaviour
     {
+        private static readonly int Stun1 = Animator.StringToHash("isStunned?");
         protected Blackboard MBlackboard;
         protected MonoBehaviourTree MTree;
         protected NavMeshAgent MAgent;
@@ -38,19 +40,24 @@ namespace Bruno.Scripts.AI
         // Update is called once per frame
         protected void Update()
         {
+            // if (gotHit)
+            // {
+            //     MStunTimer -= Time.deltaTime;
+            //     
+            //     if (MStunTimer <= 0)
+            //     {
+            //         gotHit = false;
+            //     }
+            // }
+            
+        }
+
+        protected void FixedUpdate()
+        {
             if (!MTree) return;
             MTree.Tick();
-            if (gotHit)
-            {
-                MStunTimer -= Time.deltaTime;
-                
-                if (MStunTimer <= 0)
-                {
-                    gotHit = false;
-                }
-            }
         }
-        
+
         public bool PlayerDetected()
         {
             var detectionRadius = (MAgent.height * 0.5f) * radius;
@@ -60,7 +67,6 @@ namespace Bruno.Scripts.AI
             {
                 if (hitCollider.CompareTag("Player"))
                 {
-                //    Debug.Log("found player");
                     player = hitCollider.gameObject;
                     return true;
                 }
@@ -108,6 +114,17 @@ namespace Bruno.Scripts.AI
             if (!other.CompareTag("stun")) return;
             gotHit = true;
             Debug.Log("casualties");
+        }
+
+
+        public void SetStunAnimation()
+        {
+            MAnimator.SetBool(Stun1, true);
+        }
+
+        public void DisableStunAnimation()
+        {
+            MAnimator.SetBool(Stun1, false);
         }
 
     }

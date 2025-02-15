@@ -48,14 +48,23 @@ namespace Bruno.Scripts.AI.CustomNodes
 
             if (m_Mob.PlayerDetected())
             {
-                m_Id.Value = 4;
+                m_Id.Value = 3;
                 return NodeResult.success;
             }
             
-            m_Id.Value = 4;
+            if (m_Mob.gotHit)
+            {
+                m_Id.Value = 4;
+                m_Mob.SetStunAnimation();
+                return NodeResult.success;
+            }
+            
+            m_Id.Value = 3;
            
             m_Mob.agent.ResetPath();
             m_Mob.SetAttackAnimation();
+            
+            
             
             return NodeResult.running;
         }

@@ -22,8 +22,16 @@ namespace Bruno.Scripts.AI.CustomNodes
 
         public override NodeResult Execute()
         {
+            _mMob.DisableIsStunned();
             
-           // if detected go to chase behaviour
+            if (_mMob.gotHit)
+            {
+                _mId.Value = 4;
+                _mMob.SetIsStunned();
+                return NodeResult.success;
+            }
+            
+            // if detected go to chase behaviour
            
             if (_mMob.PlayerDetected())
             {
