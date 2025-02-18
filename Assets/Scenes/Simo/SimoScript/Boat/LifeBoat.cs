@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Rendering;
 
 public class LifeBoat : MonoBehaviour
 {
@@ -18,8 +16,7 @@ public class LifeBoat : MonoBehaviour
     private PlayerController playerController;
     private Rigidbody playerRb;
 
-    private bool isPlayerOnBoard = false;
-    //private bool canPlayerExit = false;
+    private bool isPlayerOnBoard = false;  
     private bool canControl = false;
 
     // CAMERA REF
@@ -59,7 +56,6 @@ public class LifeBoat : MonoBehaviour
     void Update()
     {
 
-
         if (isLerpingToBoat)
         {
             CameraBoatOn();
@@ -70,11 +66,11 @@ public class LifeBoat : MonoBehaviour
         }
 
 
-
         if (isPlayerOnBoard)
         {
             if (lifeBoatController.GetInteract() > 0)
             {
+                Debug.Log("Pressing to enter boat");
                 canControl = true;
                 EnterBoat();
             }
@@ -119,53 +115,50 @@ public class LifeBoat : MonoBehaviour
                 player.transform.rotation = playerSeatPosition.rotation;
 
 
-                //if (harbor.canPlayerExit) // && lifeBoatController.GetInteract() > 0
-                //{
-                //    if (lifeBoatController.GetInteract() > 0)
-                //    {
-                //        Debug.Log("PRESS E TO EXIT THE BOAT ");
-                //        ExitBoat();
-                //    }
-
-
-                //}
+               
             }
 
             if (harbor.canPlayerExit) // && lifeBoatController.GetInteract() > 0
             {
                 if (lifeBoatController.GetInteract() > 0)
                 {
-                    Debug.Log("PRESS E TO EXIT THE BOAT ");
                     ExitBoat();
+                    Debug.Log("Pressing to exit boat");
+                    harbor.canPlayerExit = false;
+                    harbor.DisableCollider();
+                }
+
+                else
+                {
+                    lifeBoatController.enabled = true;
+                    Debug.Log($"can player exit {harbor.canPlayerExit}");
+                    harbor.BoxCollider.enabled = true;
                 }
 
 
             }
 
-
-
         }
-
-
     }
-
 
 
     private void EnterBoat()
     {
         Debug.Log("ENTER ON BOAT ");
-        
-        player.transform.SetParent(transform);    
+
+        player.transform.SetParent(transform);
         rb.isKinematic = false;
         playerRb.isKinematic = true;
         playerController.enabled = false; // disable the player input
-        ExitBoatPoint.gameObject.SetActive(true);
+        lifeBoatController.enabled = true;
+
         harbor.BoxCollider.enabled = true;
 
         //Camera
         camera.transform.SetParent(null);
-        isLerpingToBoat = true; 
+        isLerpingToBoat = true;
         isLerpingToOrigin = false;
+
 
     }
 
@@ -173,132 +166,25 @@ public class LifeBoat : MonoBehaviour
     {
         Debug.Log("EXIT BOAT ");
         player.transform.SetParent(null);
-        player.transform.position = playerExitSpawn.position;     
-        harbor.BoxCollider.enabled = false;
-        isPlayerOnBoard = false;
-        canControl = false;       
+        player.transform.position = playerExitSpawn.position;
+
+       
+        canControl = false;
         playerRb.isKinematic = false;
-        rb.isKinematic = true;
-        lifeBoatController.enabled = false; // If this is set, the player cant even enter on the boat 
-        playerController.enabled = true; // reable the player input
-        ExitBoatPoint.gameObject.SetActive(false);
+        rb.isKinematic = true;   
         
+        playerController.enabled = true; // reable the player input
+                                        
+
         //Camera
         camera.transform.SetParent(null);
         isLerpingToBoat = false;
         isLerpingToOrigin = true;
-        
-
     }
 
+   
 
-    //private void Floating() 
-    //{
-    //    // WITH FLOATERS
-    //    //floatersUnderWarter = 0;
-
-    //    //for (int i = 0; i < floaters.Length; i++) 
-    //    //{
-    //    //    float difference = floaters[i].position.y - waterHeight;
-
-    //    //    if (difference < 0)
-    //    //    {
-    //    //        rb.AddForceAtPosition(Vector3.up * floatinPower * Mathf.Abs(difference), floaters[i].position, ForceMode.Force);
-    //    //        floatersUnderWarter += 1;
-
-    //    //        if (!isUnderWater)
-    //    //        {
-    //    //            isUnderWater = true;
-    //    //            SwitchState(true);
-    //    //        }
-    //    //    }
-    //    //}   
-
-    //    //if (isUnderWater && floatersUnderWarter == 0)
-    //    //{
-    //    //    isUnderWater = false;
-    //    //    SwitchState(false);
-    //    //}
-
-
-    //    //___________________
-    //    //float difference = transform.position.y - waterHeight;
-
-    //    //if (difference < 0)
-    //    //{
-    //    //    rb.AddForceAtPosition(Vector3.up * floatinPower * Mathf.Abs(difference), transform.position, ForceMode.Force);
-
-    //    //    if (!isUnderWater)
-    //    //    {
-    //    //        isUnderWater = true;
-    //    //        SwitchState(true);
-    //    //    }
-    //    //}
-    //    //else if (isUnderWater)
-    //    //{
-    //    //    isUnderWater = false;
-    //    //    SwitchState(false);
-    //    //}
-
-    //    //___________________
-
-
-    //    // TRY
-    //    //floatersUnderWarter = 0;
-
-    //    //foreach (Transform floater in floaters)
-    //    //{
-    //    //    float difference = waterHeight - floater.position.y;
-
-    //    //    if (difference > 0)
-    //    //    {
-    //    //        // Applicare la forza di galleggiamento in base alla profondit�
-    //    //        rb.AddForceAtPosition(Vector3.up * floatinPower * difference, floater.position, ForceMode.Acceleration);
-    //    //        floatersUnderWarter++;
-    //    //    }
-    //    //}
-
-    //    //// Controllo se l'intera barca � sopra o sotto l'acqua
-    //    //if (floatersUnderWarter > 0)
-    //    //{
-    //    //    if (!isUnderWater)
-    //    //    {
-    //    //        isUnderWater = true;
-    //    //        SwitchState(true);
-    //    //    }
-    //    //}
-    //    //else if (isUnderWater)
-    //    //{
-    //    //    isUnderWater = false;
-    //    //    SwitchState(false);
-    //    //}
-    //}
-
-    //private void SwitchState(bool isUnderWater)
-    //{
-    //    if (isUnderWater)
-    //    {
-    //        rb.linearDamping = airDrag;
-    //        rb.angularDamping = airAngularDrag;
-    //    }
-
-
-    //    // TRY
-
-
-    //    //if (isUnderWater)
-    //    //{
-    //    //    rb.linearDamping = underWaterDrag;
-    //    //    rb.angularDamping = underWaterAngularDrag;
-    //    //}
-    //    //else
-    //    //{
-    //    //    rb.linearDamping = airDrag;
-    //    //    rb.angularDamping = airAngularDrag;
-    //    //}
-    //}
-
-
+    
     private void CameraBoatOn()
     {
         camera.transform.position = Vector3.Lerp(camera.transform.position, cameraBoatPosition.position, cameraLerpSpeed * Time.deltaTime);
@@ -311,7 +197,7 @@ public class LifeBoat : MonoBehaviour
             camera.transform.forward = cameraBoatPosition.transform.forward;
             CameraManager.canLook = false;
 
-    
+
         }
 
         // ---------------------------
@@ -357,7 +243,7 @@ public class LifeBoat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
             player = other.gameObject;
             isPlayerOnBoard = true;
@@ -367,15 +253,7 @@ public class LifeBoat : MonoBehaviour
 
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player")) // Ensure it's the player
-    //    {
-    //        //isPlayerOnBoard = false;
-    //        //canControl = false;
-    //        Debug.Log("PLAYER LEFT THE BOAT");
-    //    }
-    //}
+    
 
 
 }
