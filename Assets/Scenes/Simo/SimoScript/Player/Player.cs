@@ -291,23 +291,23 @@ public class Player : MonoBehaviour, IDamageble
 
 
 
-    private void OnDrawGizmos()
-    {
-        // Area sicura (verde)
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(originPlayerPosition, maxSafeWalkDistance);
+    //private void OnDrawGizmos()
+    //{
+    //    // Area sicura (verde)
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(originPlayerPosition, maxSafeWalkDistance);
 
-        // Area massima estensione elastico (rosso)
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(originPlayerPosition, maxExtensionOfTheElastic);
+    //    // Area massima estensione elastico (rosso)
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(originPlayerPosition, maxExtensionOfTheElastic);
 
-        // Elastico (linea)
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(transform.position, originPlayerPosition);
-        }
+    //    // Elastico (linea)
+    //    if (Application.isPlaying)
+    //    {
+    //        Gizmos.color = Color.yellow;
+    //        Gizmos.DrawLine(transform.position, originPlayerPosition);
+    //    }
 
         
-    }
+    //}
 }

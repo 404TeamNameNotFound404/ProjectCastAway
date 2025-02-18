@@ -154,6 +154,98 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Lifeboat"",
+            ""id"": ""771b7f42-411d-4a78-ac3b-1811370a145c"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""ac7fbf04-3e86-49b8-a980-e0dc8a201e1a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""72e9a390-e4dd-4530-9d06-62cfc2288570"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e2ee31f9-722a-4be2-b486-ee8435f10660"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""6897bc01-9d27-4b2b-8311-e1a9183cec14"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""336d9b59-e92a-42d7-bf14-86a813204b40"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""88e962ed-75ab-4579-bf2a-a0c696835912"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""620a0aca-d60a-4b18-a724-4971ebe70173"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f6b54017-8119-4c5b-9711-9d0236fc74f6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -164,11 +256,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        // Lifeboat
+        m_Lifeboat = asset.FindActionMap("Lifeboat", throwIfNotFound: true);
+        m_Lifeboat_Move = m_Lifeboat.FindAction("Move", throwIfNotFound: true);
+        m_Lifeboat_Interact = m_Lifeboat.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controls.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Lifeboat.enabled, "This will cause a leak and performance issues, Controls.Lifeboat.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -296,11 +393,70 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Lifeboat
+    private readonly InputActionMap m_Lifeboat;
+    private List<ILifeboatActions> m_LifeboatActionsCallbackInterfaces = new List<ILifeboatActions>();
+    private readonly InputAction m_Lifeboat_Move;
+    private readonly InputAction m_Lifeboat_Interact;
+    public struct LifeboatActions
+    {
+        private @Controls m_Wrapper;
+        public LifeboatActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Lifeboat_Move;
+        public InputAction @Interact => m_Wrapper.m_Lifeboat_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Lifeboat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LifeboatActions set) { return set.Get(); }
+        public void AddCallbacks(ILifeboatActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LifeboatActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LifeboatActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(ILifeboatActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(ILifeboatActions instance)
+        {
+            if (m_Wrapper.m_LifeboatActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILifeboatActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LifeboatActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LifeboatActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LifeboatActions @Lifeboat => new LifeboatActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface ILifeboatActions
+    {
+        void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }
