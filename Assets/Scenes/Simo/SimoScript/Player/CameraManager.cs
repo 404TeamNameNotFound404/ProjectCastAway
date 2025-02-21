@@ -8,9 +8,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float maxVerticalAngle = 80f; 
 
     private float verticalRotation = 0f; 
+    private float horizontalRotation = 0f;
     private PlayerController playerController;
 
-  
+    public static bool canLook = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +35,12 @@ public class CameraManager : MonoBehaviour
 
     private void Look() 
     {
+        
+        if (!canLook) 
+        {
+            return;
+        }
+
         Vector2 mouseInput = playerController.GetMouseLook();
 
         float mouseX = mouseInput.x * sensitivity * Time.fixedDeltaTime;
@@ -42,12 +49,15 @@ public class CameraManager : MonoBehaviour
         // Update vertical rotation with clamping
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxVerticalAngle, maxVerticalAngle);
-        
-        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
 
-        // rotation to the player's body (horizontal)
+        // Update horizontal rotation
+        horizontalRotation += mouseX;
+
+        // Apply rotations
+        transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0f);
+
+        // Apply horizontal rotation to the player's body
         playerBody.Rotate(Vector3.up * mouseX);
-
 
     }
 }

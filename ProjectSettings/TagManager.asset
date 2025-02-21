@@ -3,14 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: 
+  tags:
   - Enemy
   - casualties
+  - stun
+  - BuoyantObject
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lifeboat
   - Water
   - UI
   - 
