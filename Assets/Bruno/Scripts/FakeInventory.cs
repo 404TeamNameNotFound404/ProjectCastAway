@@ -9,27 +9,27 @@ namespace Bruno.Scripts
     {
         [SerializeField] private RawImage ui;
         [SerializeField] private TMP_Text textCounter;
-        private static int mBulbCounter = 0;
-        public static bool WinConditionReached => WinCondition();
+        private static int _mBulbCounter = 0;
+        public static bool winConditionReached => WinCondition();
 
         public static bool itemPicked { get; set; } = false;
 
         private void Start()
         {
-            textCounter.text = mBulbCounter.ToString();
+            textCounter.text = _mBulbCounter.ToString();
         }
         
         // itemPicked will set to true via player OnTriggerEnter function with the relative tag 
         public void GetItem()
         {
-            mBulbCounter++;
-            textCounter.text = mBulbCounter.ToString();
+            _mBulbCounter++;
+            textCounter.text = _mBulbCounter.ToString();
             itemPicked = false;
         }
 
         private static bool WinCondition()
         {
-            return mBulbCounter >= 2;
+            return _mBulbCounter >= 2;
         }
     
     }

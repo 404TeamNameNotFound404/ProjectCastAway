@@ -22,7 +22,7 @@ namespace Bruno.Scripts
 
         public void StartGame()
         {
-            if (_mStop  || !FakeInventory.WinConditionReached) return;
+            if (_mStop  || !FakeInventory.winConditionReached) return;
             waveText.gameObject.SetActive(true);
             _mTimeLeft -= Time.deltaTime * 1.5f;
             waveText.text = "Rescues will arrive in " + _mTimeLeft + " seconds.";

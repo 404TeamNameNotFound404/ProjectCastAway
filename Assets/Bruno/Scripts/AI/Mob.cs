@@ -20,6 +20,8 @@ namespace Bruno.Scripts.AI
         [SerializeField] [Range(0.05f, 0.9f)] protected float attackAreaThreshold = 0.8f;
         [SerializeField] protected DamageData damageData;
         
+        public DamageData damageDataRef => damageData;
+        
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
         public NavMeshAgent agent => MAgent;

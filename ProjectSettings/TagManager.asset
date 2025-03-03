@@ -8,6 +8,7 @@ TagManager:
   - casualties
   - stun
   - BuoyantObject
+  - slot
   layers:
   - Default
   - TransparentFX

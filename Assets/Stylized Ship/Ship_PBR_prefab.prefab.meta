@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 516f9ac2b79d24b4b88fee1fe0cd5516
+timeCreated: 1499002298
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 94568
+  packageName: Stylized Ship Unlit and PBR
+  packageVersion: 1.0
+  assetPath: Assets/Stylized Ship/Ship_PBR_prefab.prefab
+  uploadId: 188061

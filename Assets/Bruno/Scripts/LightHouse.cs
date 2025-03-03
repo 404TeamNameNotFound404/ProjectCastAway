@@ -6,20 +6,23 @@ namespace Bruno.Scripts
     public class LightHouse : MonoBehaviour
     {
         private EndGameWave _mWave;
+        [SerializeField] private RescueShip ship;
         
         public bool beginWave { get; private set; }
 
         private void Start()
         {
             _mWave = GetComponent<EndGameWave>();
+            Debug.Log("ship? " + ship.name);
         }
 
         void Update()
         {
-            if (!FakeInventory.WinConditionReached) return;
+            if (!FakeInventory.winConditionReached) return;
 
             if (beginWave)
             {
+                ship.gameObject.SetActive(true);
                 StartWave();
             }
         }
@@ -27,7 +30,7 @@ namespace Bruno.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player") || !FakeInventory.WinConditionReached) return;
+            if (!other.CompareTag("Player") || !FakeInventory.winConditionReached) return;
             beginWave = true;
         }
 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9132e00242b034d7a9ff3506bcda15a6, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
+  SlotName: Arrow
   damage: 3
   attackPower: 3
   multiplier: 0.4

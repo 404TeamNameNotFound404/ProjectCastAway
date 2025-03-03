@@ -1,3 +1,5 @@
+using System;
+using Bruno.Scripts.AI;
 using UnityEngine;
 
 
@@ -303,6 +305,22 @@ public class Player : MonoBehaviour, IDamageble
         }
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("slot")) return;
+        var e = other.gameObject.GetComponent<Mob>();
+        
+        if (e.damageDataRef.SlotName == "Dagger")
+        {
+           /* currentHealth -= */  e.damageDataRef.ApplyDaggerDamage();
+        }
+
+        if (e.damageDataRef.SlotName == "Arrow")
+        {
+            /* currentHealth -= */  e.damageDataRef.ApplyArrowDamage();
+        }
+    }
 
 
     //private void OnDrawGizmos()
