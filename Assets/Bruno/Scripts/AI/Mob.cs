@@ -17,7 +17,8 @@ namespace Bruno.Scripts.AI
         [Header("Locomotion")]
         [SerializeField] [Range(0.1f, 10.8f)] private float radius = 10.5f;
         [SerializeField] [Range(0.1f, 5.0f)] private float spreadRadius = 2.0f;
-        [SerializeField] [Range(0.05f, 0.9f)] private float attackAreaThreshold = 0.8f;
+        [SerializeField] [Range(0.05f, 0.9f)] protected float attackAreaThreshold = 0.8f;
+        [SerializeField] protected DamageData damageData;
         
         public float speed { get; set; } = 1.0f;
         public GameObject player { get; private set; }
@@ -81,7 +82,7 @@ namespace Bruno.Scripts.AI
         /// </summary>
         /// <param name="target"> The player </param>
         /// <returns></returns>
-        public bool IsCloseToAttack(GameObject target)
+        public virtual bool IsCloseToAttack(GameObject target)
         {
             if (!PlayerDetected()) return false;
 

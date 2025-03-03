@@ -43,6 +43,9 @@ public class Player : MonoBehaviour, IDamageble
     [SerializeField] private float health = 100f;
 
     private float maxHealth = 100f;
+    
+    //Animations
+    private Animator animator;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,9 +54,9 @@ public class Player : MonoBehaviour, IDamageble
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        animator = GetComponent<Animator>();
         
         originPlayerPosition = transform.position;
-
         
     }
 
@@ -89,6 +92,7 @@ public class Player : MonoBehaviour, IDamageble
         Vector3 cameraForward = playerCamera.transform.forward;
 
         Vector3 cameraRight = playerCamera.transform.right;
+        
 
         cameraForward.y = 0f;
         cameraRight.y = 0f; 
@@ -100,9 +104,19 @@ public class Player : MonoBehaviour, IDamageble
 
         Vector3 movementDirection = (cameraForward * movement.z +  cameraRight * movement.x).normalized;
 
+        if (movementDirection != Vector3.zero)
+        {
+            animator.SetFloat("velocity", 1.0f);
+        }
+        else
+        {
+            animator.SetFloat("velocity", 0f);
+        }
+
         float finalSpeed = isDraggingWeight ? speedWalk * weightMultiplier : speedWalk;
 
         Vector3 newPos = rb.position + movementDirection * finalSpeed * Time.fixedDeltaTime;
+        
 
         rb.MovePosition(newPos);
     }

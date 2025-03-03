@@ -29,37 +29,40 @@ namespace Bruno.Scripts.AI.CustomNodes
             _mId.Value = 2;
             _mTimer += Time.deltaTime * 5.0f;
             _mMob.agent.ResetPath();
-            
+            _mMob.SetIsStunned();
+
             if (_mTimer >= MTimeUntilReset)
             {
+                Debug.Log("Guardian stun timer has expired");
                 // if player is seen after stun go chase it
-            
+
                 if (_mMob.PlayerDetected())
                 {
+                    _mTimer = 0.0f;
                     _mId.Value = 3;
-                    _mMob.agent.ResetPath();
                     _mMob.DisableIsStunned();
                     _mMob.SetWalkAnimation();
                     return NodeResult.success;
                 }
-                
-                
                 // otherwise idle state again for the sake of simplicity
-                _mId.Value = 0;
-                _mMob.agent.ResetPath();
-                _mMob.DisableIsStunned();
-                _mMob.SetIdleAnimation();
-                
-                return NodeResult.success;
+
+                if (!_mMob.PlayerDetected())
+                {
+                    _mTimer = 0.0f;
+                    _mId.Value = 0;
+                    _mMob.DisableIsStunned();
+                    _mMob.SetIdleAnimation();
+                    return NodeResult.success;
+                }
             }
-            
-            _mMob.SetIsStunned();
+
             return NodeResult.running;
         }
 
         public override void OnExit()
         {
             _mTimer = 0.0f;
+            _mMob.gotHit = false;
         }
     }
 }

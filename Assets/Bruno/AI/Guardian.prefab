@@ -1485,6 +1485,7 @@ MonoBehaviour:
   radius: 10.5
   spreadRadius: 2
   attackAreaThreshold: 0.8
+  damageData: {fileID: 11400000, guid: 6cb521fd5c2000784b163c97447cb24b, type: 2}
 --- !u!1 &1430317860604830622
 GameObject:
   m_ObjectHideFlags: 0

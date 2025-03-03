@@ -27,7 +27,15 @@ namespace Bruno.Scripts.AI
         {
             base.FixedUpdate();
         }
-        
+
+        public override bool IsCloseToAttack(GameObject target)
+        {
+            if (!PlayerDetected()) return false;
+            var distance = Vector3.Distance(target.transform.position, agent.transform.position);
+            return distance <= attackAreaThreshold;
+        }
+
+        #region Animations
         public void SetWalkAnimation()
         {
             MAnimator.SetFloat(Velocity, 1.0f);
@@ -62,7 +70,7 @@ namespace Bruno.Scripts.AI
         {
             MAnimator.SetTrigger(Attack);
         }
-        
+        #endregion
         
         protected new void OnTriggerEnter(Collider other)
         {

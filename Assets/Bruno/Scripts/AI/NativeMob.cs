@@ -3,6 +3,7 @@ using UnityEngine;
 using MBT;
 using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
+using Quaternion = System.Numerics.Quaternion;
 
 namespace Bruno.Scripts.AI
 {
