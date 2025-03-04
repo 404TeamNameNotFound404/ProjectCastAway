@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dagger
   m_EditorClassIdentifier: 
   SlotName: Dagger
-  damage: 8
-  attackPower: 2
-  multiplier: 0.5
+  damage: 15
+  attackPower: 9
+  multiplier: 0.7
   distance: 0

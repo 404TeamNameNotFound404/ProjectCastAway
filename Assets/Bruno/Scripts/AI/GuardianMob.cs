@@ -76,5 +76,19 @@ namespace Bruno.Scripts.AI
         {
             base.OnTriggerEnter(other);
         }
+        
+        
+        #region Animations
+
+        public void EnableHitbox()
+        {
+            _mDaggerCollider.enabled = true;
+        }
+
+        public void DisableHitbox()
+        {
+            _mDaggerCollider.enabled = false;
+        }
+        #endregion
     }
 }

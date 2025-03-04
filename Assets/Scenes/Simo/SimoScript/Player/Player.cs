@@ -46,6 +46,12 @@ public class Player : MonoBehaviour, IDamageble
 
     private float maxHealth = 100f;
     
+    
+    // AI Damage Signal
+    private Mob oneToHit; // who hit the player
+    private bool gotHit;
+    
+    
     //Animations
     private Animator animator;
 
@@ -71,6 +77,11 @@ public class Player : MonoBehaviour, IDamageble
         //}
 
         CheckIfPlayerStopped();
+
+        if (gotHit)
+        {
+            HandleAIDamage();
+        }
 
        // DrunkEffect();
 
@@ -291,6 +302,7 @@ public class Player : MonoBehaviour, IDamageble
     public void TakeDamage(float damage) 
     {
         health -= damage;
+        Debug.Log($"health left {health}");
 
         if (health <= 0)
         {
@@ -308,17 +320,22 @@ public class Player : MonoBehaviour, IDamageble
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("slot")) return;
-        var e = other.gameObject.GetComponent<Mob>();
-        
-        if (e.damageDataRef.SlotName == "Dagger")
+        oneToHit = other.gameObject.GetComponentInParent<Mob>();
+        gotHit = true;
+    }
+
+    private void HandleAIDamage()
+    {
+        if (oneToHit is NativeMob)
         {
-           /* currentHealth -= */  e.damageDataRef.ApplyDaggerDamage();
+            TakeDamage(oneToHit.damageDataRef.ApplyArrowDamage());
+            gotHit = false;
         }
 
-        if (e.damageDataRef.SlotName == "Arrow")
+        if (oneToHit is GuardianMob)
         {
-            /* currentHealth -= */  e.damageDataRef.ApplyArrowDamage();
+            TakeDamage(oneToHit.damageDataRef.ApplyDaggerDamage());
+            gotHit = false;
         }
     }
 
