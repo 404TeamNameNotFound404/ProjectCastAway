@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""97a9c644-c542-409d-9eaa-a2821c288e6c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8c2c537-f092-4bd3-955f-0aeacc58a08e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Close"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -256,6 +276,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Close = m_Player.FindAction("Close", throwIfNotFound: true);
         // Lifeboat
         m_Lifeboat = asset.FindActionMap("Lifeboat", throwIfNotFound: true);
         m_Lifeboat_Move = m_Lifeboat.FindAction("Move", throwIfNotFound: true);
@@ -331,6 +352,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Throw;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Close;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -339,6 +361,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Throw => m_Wrapper.m_Player_Throw;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Close => m_Wrapper.m_Player_Close;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +383,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -376,6 +402,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -453,6 +482,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
     }
     public interface ILifeboatActions
     {

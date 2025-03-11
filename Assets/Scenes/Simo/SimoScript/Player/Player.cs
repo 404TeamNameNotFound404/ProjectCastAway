@@ -41,8 +41,14 @@ public class Player : MonoBehaviour, IDamageble
 
     //HEALTH
     [SerializeField] private float health = 100f;
-
     private float maxHealth = 100f;
+
+    // RESPAWN
+    [SerializeField] private Transform spawnPointPlayer;
+    [SerializeField] private float controllerActivateTime = 5;
+    [SerializeField] private float controllerActivateTimer;
+    
+    // ADD TIMER TO DISABLE CONTROLS WHEN PLAYER DIED; ENABLE THEM AFTER THE VFX AND CINEMATIC SCENE
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,7 +59,6 @@ public class Player : MonoBehaviour, IDamageble
         capsuleCollider = GetComponent<CapsuleCollider>();
         
         originPlayerPosition = transform.position;
-
         
     }
 
@@ -69,6 +74,19 @@ public class Player : MonoBehaviour, IDamageble
 
        // DrunkEffect();
 
+        if(health == maxHealth) 
+        {
+            // Reactivate playercontroller after dead
+            controllerActivateTimer += Time.deltaTime;
+
+            if (controllerActivateTimer >= controllerActivateTime)
+            {
+                playerController.enabled = true;
+                controllerActivateTimer = controllerActivateTime;
+
+            }
+        }
+
     }
 
 
@@ -81,7 +99,6 @@ public class Player : MonoBehaviour, IDamageble
     }
 
     // MOVEMENT
-
     private void Move()
     {
         Vector2 input = playerController.GetMovement();
@@ -106,6 +123,7 @@ public class Player : MonoBehaviour, IDamageble
 
         rb.MovePosition(newPos);
     }
+
 
     // DRUNK EFFECT
     private void DrunkEffect() 
@@ -280,7 +298,10 @@ public class Player : MonoBehaviour, IDamageble
         {
             // VFX EYES CLOSE
             Debug.Log("Player has died.");
-            Destroy(gameObject);
+            transform.position = spawnPointPlayer.position;
+            health = maxHealth;
+            playerController.enabled = false; // disable ctrl when player died
+ 
         }
         else if (health <= 50f)
         {

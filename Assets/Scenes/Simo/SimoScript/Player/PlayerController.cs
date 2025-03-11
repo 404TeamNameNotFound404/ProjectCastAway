@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
     private InputAction throwAction;
     private InputAction interactAction;
+    
 
 
     private void Awake()
@@ -33,10 +35,12 @@ public class PlayerController : MonoBehaviour
         interactAction = inputActions.FindAction("Interact");
         interactAction.performed += OnInteract;
 
+
         moveAction.Enable();
         lookAction.Enable();
         throwAction.Enable(); 
         interactAction.Enable();
+       
 
 
     }
@@ -49,13 +53,18 @@ public class PlayerController : MonoBehaviour
 
         throwAction.performed -= OnThrow;
 
-        interactAction.performed += OnInteract;
+        interactAction.performed -= OnInteract;
+
+        
 
         moveAction.Disable();
         lookAction.Disable();
         throwAction.Disable();
         interactAction.Disable();
+        
     }
+
+    
 
     public Vector2 GetMovement() 
     {
@@ -81,6 +90,10 @@ public class PlayerController : MonoBehaviour
         return interactAction.ReadValue<float>();
     }
 
+    
+
+
+
     private void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveInput = context.ReadValue<Vector2>();
@@ -100,6 +113,8 @@ public class PlayerController : MonoBehaviour
     {
         bool InteractInput = context.ReadValueAsButton();
     }
+
+   
 
 
 }
