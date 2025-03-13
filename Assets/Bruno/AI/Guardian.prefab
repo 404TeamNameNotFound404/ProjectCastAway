@@ -812,14 +812,12 @@ GameObject:
   - component: {fileID: 2131742083992218317}
   - component: {fileID: 7319788900570730900}
   - component: {fileID: 5493856678764237712}
-  - component: {fileID: 9127923725560128345}
   - component: {fileID: 6178828373009235725}
   - component: {fileID: 518364243764429531}
   - component: {fileID: 7099664802132210056}
   - component: {fileID: 7501902211270673692}
   - component: {fileID: 7000214078418368852}
   - component: {fileID: 2280731685823252207}
-  - component: {fileID: 2746926891437329658}
   - component: {fileID: 2149130457583455720}
   - component: {fileID: 8223052709166462692}
   m_Layer: 0
@@ -970,7 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 2149130457583455720}
+  selectedEditorNode: {fileID: 6178828373009235725}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1130,65 +1128,12 @@ MonoBehaviour:
   children:
   - {fileID: 7099664802132210056}
   - {fileID: 7319788900570730900}
-  - {fileID: 9127923725560128345}
   - {fileID: 518364243764429531}
   - {fileID: 6178828373009235725}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
   random: 0
---- !u!114 &9127923725560128345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344001677859955422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b95a918be8d9a4f9085201010bdec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: StunCond
-  rect:
-    serializedVersion: 2
-    x: 520
-    y: 260
-    width: 160
-    height: 44
-  parent: {fileID: 5493856678764237712}
-  children:
-  - {fileID: 2746926891437329658}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  type: 1
-  floatReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: 0
-  intReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 7262534873527489443}
-    key: id
-    constantValue: 0
-  comparator: 0
-  floatReference2:
-    useConstant: 1
-    mode: 0
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: 0
-  intReference2:
-    useConstant: 1
-    mode: 0
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: 2
 --- !u!114 &6178828373009235725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,8 +1149,8 @@ MonoBehaviour:
   title: EngageCond
   rect:
     serializedVersion: 2
-    x: 860
-    y: 260
+    x: 731
+    y: 285
     width: 160
     height: 44
   parent: {fileID: 5493856678764237712}
@@ -1256,8 +1201,8 @@ MonoBehaviour:
   title: ChaseCond
   rect:
     serializedVersion: 2
-    x: 680
-    y: 320
+    x: 540
+    y: 280
     width: 160
     height: 44
   parent: {fileID: 5493856678764237712}
@@ -1385,8 +1330,8 @@ MonoBehaviour:
   title: GuardianChase
   rect:
     serializedVersion: 2
-    x: 680
-    y: 400
+    x: 540
+    y: 360
     width: 160
     height: 44
   parent: {fileID: 518364243764429531}
@@ -1410,36 +1355,11 @@ MonoBehaviour:
   title: GuardianEngage
   rect:
     serializedVersion: 2
-    x: 860
-    y: 360
+    x: 740
+    y: 380
     width: 160
     height: 44
   parent: {fileID: 6178828373009235725}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  blackboard: {fileID: 7262534873527489443}
---- !u!114 &2746926891437329658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344001677859955422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70655838ee2ffc52fa93cae65277dc96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: GuardianStun
-  rect:
-    serializedVersion: 2
-    x: 520
-    y: 360
-    width: 160
-    height: 44
-  parent: {fileID: 9127923725560128345}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0

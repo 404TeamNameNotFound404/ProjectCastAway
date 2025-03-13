@@ -40,15 +40,6 @@ namespace Bruno.Scripts.AI.CustomNodes
                 return NodeResult.success;
             }
             
-            // if got hit by something got stunned
-            if (_mMob.gotHit)
-            {
-                _mId.Value = 2;
-                _mMob.SetIsStunned();
-                Debug.Log("transitioning to got hit");
-                return NodeResult.success;
-            }
-            
             //if no conditions are met just stay idle and humble
             _mMob.DisableIsStunned();
             _mMob.SetIdleAnimation();

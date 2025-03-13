@@ -15,9 +15,9 @@ namespace Bruno.Scripts.AI
         protected float MStunTimer;
         
         [Header("Locomotion")]
-        [SerializeField] [Range(0.1f, 10.8f)] private float radius = 10.5f;
+        [SerializeField] [Range(0.1f, 20.8f)] private float radius = 10.5f;
         [SerializeField] [Range(0.1f, 5.0f)] private float spreadRadius = 2.0f;
-        [SerializeField] [Range(0.05f, 0.9f)] protected float attackAreaThreshold = 0.8f;
+        [SerializeField] [Range(0.05f, 15.9f)] protected float attackAreaThreshold = 0.8f;
         [SerializeField] protected DamageData damageData;
         
         public DamageData damageDataRef => damageData;
@@ -116,7 +116,7 @@ namespace Bruno.Scripts.AI
         {
             if (!other.CompareTag("stun")) return;
             gotHit = true;
-            Debug.Log("casualties");
+            Debug.Log($"casualties hit by {other.gameObject.name}");
         }
 
 

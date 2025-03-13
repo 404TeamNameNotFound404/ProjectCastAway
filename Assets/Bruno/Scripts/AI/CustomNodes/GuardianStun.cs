@@ -26,7 +26,7 @@ namespace Bruno.Scripts.AI.CustomNodes
 
         public override NodeResult Execute()
         { 
-            _mId.Value = 2;
+            _mId.Value = 4;
             _mTimer += Time.deltaTime * 5.0f;
             _mMob.agent.ResetPath();
             _mMob.SetIsStunned();

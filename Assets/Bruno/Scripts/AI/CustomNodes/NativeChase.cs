@@ -42,7 +42,7 @@ namespace Bruno.Scripts.AI.CustomNodes
                 m_Id.Value = 3;
                 m_Mob.gotHit = false;
                 m_Mob.agent.ResetPath();
-                return NodeResult.success;
+                return NodeResult.success;//
             }
 
 
@@ -50,13 +50,24 @@ namespace Bruno.Scripts.AI.CustomNodes
             m_Id.Value = 1;
             m_Mob.SetWalkAnimation();
             m_Mob.agent.SetDestination(m_Target.Value.transform.position);
+
+            if (m_Mob.IsPlayerTooClose(m_Target.Value))
+            {
+                m_Mob.agent.ResetPath();
+            }
             
             if (m_Mob.IsCloseToAttack(m_Target.Value))
             {
                 m_Id.Value = 4;
                 m_Mob.SetAttackAnimation();
-                m_Mob.agent.ResetPath();
-                return NodeResult.success;
+
+                if (m_Mob.attackComplete)
+                {
+                    m_Mob.agent.ResetPath();
+                    return NodeResult.success;
+                }
+                
+                return NodeResult.running; //
             }
             
             

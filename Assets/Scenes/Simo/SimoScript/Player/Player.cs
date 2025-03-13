@@ -48,13 +48,13 @@ public class Player : MonoBehaviour, IDamageble
     
     
     // AI Damage Signal
-    private Mob oneToHit; // who hit the player
-    private bool gotHit;
+    private Mob _oneToHit; // who hit the player
+    private bool _gotHit;
     
     
-    //Animations
-    private Animator animator;
-
+    //Animations & Cutscenes
+    private Animator _animator;
+    private bool _enableController; // boolean only used for the initial cutscenes where player can't move around while cutscene is playing
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,10 +62,10 @@ public class Player : MonoBehaviour, IDamageble
         rb = GetComponent<Rigidbody>();
         playerController = GetComponent<PlayerController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         
         originPlayerPosition = transform.position;
-        
+        _enableController = true;
     }
 
     // Update is called once per frame
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour, IDamageble
 
         CheckIfPlayerStopped();
 
-        if (gotHit)
+        if (_gotHit)
         {
             HandleAIDamage();
         }
@@ -100,6 +100,8 @@ public class Player : MonoBehaviour, IDamageble
 
     private void Move()
     {
+        if (!_enableController) return; 
+        
         Vector2 input = playerController.GetMovement();
 
         Vector3 cameraForward = playerCamera.transform.forward;
@@ -119,17 +121,18 @@ public class Player : MonoBehaviour, IDamageble
 
         if (movementDirection != Vector3.zero)
         {
-            animator.SetFloat("velocity", 1.0f);
+            _animator.SetFloat("velocity", 1.0f);
         }
         else
         {
-            animator.SetFloat("velocity", 0f);
+            _animator.SetFloat("velocity", 0f);
         }
 
         float finalSpeed = isDraggingWeight ? speedWalk * weightMultiplier : speedWalk;
 
-        Vector3 newPos = rb.position + movementDirection * finalSpeed * Time.fixedDeltaTime;
+        Vector3 newPos = rb.position + movementDirection * (finalSpeed * Time.fixedDeltaTime);
         
+        // rotate toward the direction 
 
         rb.MovePosition(newPos);
     }
@@ -320,25 +323,40 @@ public class Player : MonoBehaviour, IDamageble
 
     private void OnTriggerEnter(Collider other)
     {
-        oneToHit = other.gameObject.GetComponentInParent<Mob>();
-        gotHit = true;
+        _oneToHit = other.gameObject.GetComponentInParent<Mob>();  // for dagger
+        Debug.Log($"hit by {other.gameObject.name}");
+        _gotHit = true;
     }
 
     private void HandleAIDamage()
     {
-        if (oneToHit is NativeMob)
+        if (_oneToHit is NativeMob)
         {
-            TakeDamage(oneToHit.damageDataRef.ApplyArrowDamage());
-            gotHit = false;
+            TakeDamage(_oneToHit.damageDataRef.ApplyArrowDamage());
+            Debug.Log("native mob found");
+            _gotHit = false;
         }
 
-        if (oneToHit is GuardianMob)
+        if (_oneToHit is GuardianMob)
         {
-            TakeDamage(oneToHit.damageDataRef.ApplyDaggerDamage());
-            gotHit = false;
+            TakeDamage(_oneToHit.damageDataRef.ApplyDaggerDamage());
+            _gotHit = false;
         }
     }
 
+    
+    // Animation events (cutscenes only)
+    public void EnableController()
+    {
+        _enableController = true;
+    }
+
+    public void DisableController()
+    {
+        _enableController = false;
+    }
+    
+    // End animations events
 
     //private void OnDrawGizmos()
     //{

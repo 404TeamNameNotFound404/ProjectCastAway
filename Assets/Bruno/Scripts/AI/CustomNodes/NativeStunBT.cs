@@ -56,6 +56,11 @@ namespace Bruno.Scripts.AI.CustomNodes
             return NodeResult.running;
         }
 
+
+        public override void OnExit()
+        {
+            _mTimer = 6.0f;
+        }
     }
 }
 

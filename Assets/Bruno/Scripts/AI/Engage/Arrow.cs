@@ -1,33 +1,46 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Bruno.Scripts.AI.Engage
 {
     public class Arrow : MonoBehaviour
     {
-        private float m_Timer = 0.0f;
-        private float m_TimeToLive = 5.0f;
-        private Rigidbody m_Rigidbody;
-        private GameObject m_Target;
+        private float _mTimer;
+        private const float MTimeToLive = 5.0f;
+        private Rigidbody _mRigidbody;
+        private GameObject _mTarget;
         /// <summary>
         /// The agent that shot it
         /// </summary>
         [SerializeField] private GameObject source;
-
         [SerializeField] private float trajectorySpeed = 30.0f;
+        
+        private Player _player;
+        private Mob _mob;
 
         private void Start()
         {
-            m_Rigidbody = GetComponent<Rigidbody>();
-            m_Rigidbody.isKinematic = false;
-            m_Rigidbody.mass = 2.0f;
-            m_Rigidbody.useGravity = true;
-            m_Target = GameObject.FindGameObjectWithTag("Player");
-            var targetDirection = source.transform.forward; 
-            m_Rigidbody.AddForce(targetDirection * (200.0f * Time.deltaTime), ForceMode.Impulse);
-            m_Rigidbody.linearVelocity = transform.forward * trajectorySpeed;
+            _mRigidbody = GetComponent<Rigidbody>();
+            _mRigidbody.isKinematic = false;
+            _mRigidbody.mass = 2.0f;
+            _mRigidbody.useGravity = false;
+          
+            _mTarget = GameObject.FindGameObjectWithTag("Player");
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _mob = source.GetComponent<Mob>();
+             var agent = source.GetComponent<NavMeshAgent>();
+             var targetDirection = (_mTarget.transform.position - transform.position).normalized;
+            _mRigidbody.AddForce(targetDirection * 250.0f, ForceMode.Impulse);
+            //_mRigidbody.linearVelocity = transform.forward * trajectorySpeed;
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player")) return; 
+            _player.TakeDamage(_mob.damageDataRef.ApplyArrowDamage());
+        }
+
         private void FixedUpdate()
         {
             if (!source)
@@ -36,20 +49,20 @@ namespace Bruno.Scripts.AI.Engage
                 return;
             }
             
-            // if (m_Timer == 0) // Ensure force is applied only once
+            // if (_mTimer == 0) // Ensure force is applied only once
             // {
             //     var targetDirection = transform.forward;
-            //     m_Rigidbody.AddForce(targetDirection * 20.0f, ForceMode.Impulse);
+            //     _mRigidbody.AddForce(targetDirection * 20.0f, ForceMode.Impulse);
+            // }
+            //
+            // if (_mRigidbody.linearVelocity.magnitude > 0.1f)
+            // {
+            //     transform.forward = _mRigidbody.linearVelocity.normalized;
             // }
             
-            if (m_Rigidbody.linearVelocity.magnitude > 0.1f)
-            {
-                transform.forward = m_Rigidbody.linearVelocity.normalized;
-            }
-
-            m_Timer += Time.deltaTime;
-
-            if (m_Timer >= m_TimeToLive)
+            _mTimer += Time.deltaTime;
+            
+            if (_mTimer >= MTimeToLive)
             {
                 Destroy(gameObject);
             }
